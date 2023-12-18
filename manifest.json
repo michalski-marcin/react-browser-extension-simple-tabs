@@ -1,0 +1,13 @@
+{
+    "manifest_version": 3,
+    "version": "0.5",
+    "name": "Quick Bookmarks",
+    "action": {
+        "default_popup": "index.html"no
+        
+    },
+    "permissions": [
+        "tabs",
+        "storage"
+    ]
+}
