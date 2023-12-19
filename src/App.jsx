@@ -72,9 +72,9 @@ function App() {
       />
       <textarea
       className={style.textarea}
-        rows='4'
+        rows='2'
         id='input-comment'
-        placeholder='your comment...'
+        placeholder='additional comment'
         maxLength='125'
         value={inputComment}
         onChange={(e) => setInputComment(e.target.value)} />
