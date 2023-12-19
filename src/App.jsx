@@ -75,7 +75,7 @@ function App() {
         rows='4'
         id='input-comment'
         placeholder='your comment...'
-        maxLength='175'
+        maxLength='125'
         value={inputComment}
         onChange={(e) => setInputComment(e.target.value)} />
       
@@ -96,21 +96,32 @@ function App() {
           </li>
         ))}
         <li>
-            <a target='_blank' href="#" className={style.title}>
+          <div className={style.tabContainer}>
+          <div className={style.tabtext}>
+            <a target='_blank' href="#" className={style.tabTitle}>
               Tutuł strony
             </a>
-            <p className={style.comment}>Opis strony mideidjei custom</p>
-            <div>
+            
+            <p className={style.tabComment}>Opis strony mideidjei custom</p>
+            </div>
+            <div className={style.tabDelete}>
               <button onClick={() => deleteSite(index)}>Delete</button>
             </div>
+            </div>
           </li>
+          
           <li>
-            <a target='_blank' href="#" className={style.title}>
-              Druga strona
+          <div className={style.tabContainer}>
+          <div className={style.tabtext}>
+            <a target='_blank' href="#" className={style.tabTitle}>
+              Tutuł strony
             </a>
-            <p className={style.comment}>Inny opis</p>
-            <div>
+            
+            <p className={style.tabComment}>Opis strony mideidjei custom</p>
+            </div>
+            <div className={style.tabDelete}>
               <button onClick={() => deleteSite(index)}>Delete</button>
+            </div>
             </div>
           </li>
       </ul>
