@@ -1,7 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@800&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+
 body {
-    min-width: 450px;
+    width: 450px;
+    
 }
