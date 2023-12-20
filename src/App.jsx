@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import "./App.css";
 import { style } from "./assets/Styling";
 import { RxCross2 } from "react-icons/rx";
@@ -83,12 +84,17 @@ function App() {
         />
 
         <button onClick={saveTab} id='save-btn' className={style.savebutton}>
-          <span>+</span> Add Tab
+          Add Tab
         </button>
 
         <ul>
+          <AnimatePresence>
           {mySites.map((site, index) => (
-            <li key={index}>
+            <motion.li
+              key={index}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}>
               <div className={style.tabContainer}>
                 <div className={style.tabtext}>
                   <a target='_blank' href={site.url} className={style.tabTitle}>
@@ -102,37 +108,42 @@ function App() {
                   </button>
                 </div>
               </div>
-            </li>
+            </motion.li>
           ))}
           {/* <li>
-          <div className={style.tabContainer}>
-          <div className={style.tabtext}>
-            <a target='_blank' href="#" className={style.tabTitle}>
-              dev test title1
-            </a>
-            
-            <p className={style.tabComment}>dev test 1 desrptn</p>
-            </div>
-            <div className={style.tabDelete}>
-              <button onClick={() => deleteSite(index)}><RxCross2 /></button>
-            </div>
+            <div className={style.tabContainer}>
+              <div className={style.tabtext}>
+                <a target='_blank' href='#' className={style.tabTitle}>
+                  dev test title1
+                </a>
+
+                <p className={style.tabComment}>dev test 1 desrptn</p>
+              </div>
+              <div className={style.tabDelete}>
+                <button onClick={() => deleteSite(index)}>
+                  <RxCross2 />
+                </button>
+              </div>
             </div>
           </li>
-          
+
           <li>
-          <div className={style.tabContainer}>
-          <div className={style.tabtext}>
-            <a target='_blank' href="#" className={style.tabTitle}>
-              dev test title2
-            </a>
-            
-            <p className={style.tabComment}>dev test 2 desrptn</p>
-            </div>
-            <div className={style.tabDelete}>
-              <button onClick={() => deleteSite(index)}><RxCross2 /></button>
-            </div>
+            <div className={style.tabContainer}>
+              <div className={style.tabtext}>
+                <a target='_blank' href='#' className={style.tabTitle}>
+                  dev test title2
+                </a>
+
+                <p className={style.tabComment}>dev test 2 desrptn</p>
+              </div>
+              <div className={style.tabDelete}>
+                <button onClick={() => deleteSite(index)}>
+                  <RxCross2 />
+                </button>
+              </div>
             </div>
           </li> */}
+          </AnimatePresence>
         </ul>
       </div>
     </div>
