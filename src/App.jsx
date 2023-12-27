@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import "./App.css";
-import { style } from "./assets/Styling";
-import { RxCross2 } from "react-icons/rx";
+import TabList from "./components/TabList";
+import TabForm from "./components/TabForm";
 
 function App() {
   const [mySites, setMySites] = useState([]);
@@ -10,8 +8,7 @@ function App() {
   const [inputComment, setInputComment] = useState("");
 
   useEffect(() => {
-    const storage = chrome?.storage?.local;
-    // const storage = chrome?.storage?.local || browser?.storage?.local;
+    const storage = chrome?.storage?.local || browser?.storage?.local;
 
     if (!storage) {
       console.error("WebExtensions storage API not supported");
@@ -21,7 +18,7 @@ function App() {
     storage.get("mySites", (result) => {
       const sitesFromStorage = result.mySites;
       if (sitesFromStorage) {
-        setMySites(sitesFromStorage);
+        setMySites((prevSites) => [...prevSites, ...sitesFromStorage]);
       }
     });
   }, []);
@@ -34,11 +31,12 @@ function App() {
         url: tabs[0].url,
       };
 
-      setMySites([...mySites, newSite]);
+      const updatedSites = [...mySites, newSite];
+      setMySites(updatedSites);
 
       const storage = chrome?.storage?.local || browser?.storage?.local;
       if (storage) {
-        storage.set({ mySites: [...mySites, newSite] });
+        storage.set({ mySites: updatedSites });
       }
 
       setInputTitle("");
@@ -59,92 +57,16 @@ function App() {
   };
 
   return (
-    <div className={style.bg}>
-      <div className={style.container}>
-        <div className={style.logo}>
-          <p className={style.logoText}>TabMinder</p>
-        </div>
-        <input
-          className={style.input}
-          type='text'
-          id='input-title'
-          placeholder='custom title'
-          maxLength='35'
-          required
-          value={inputTitle}
-          onChange={(e) => setInputTitle(e.target.value)}
+    <div className='h-screen w-screen bg-[#174873]'>
+      <div className='p-5 w-screen overflowx-hidden m-auto bg-[#F2F2F2] shadow-md'>
+        <TabForm
+          inputTitle={inputTitle}
+          inputComment={inputComment}
+          setInputTitle={setInputTitle}
+          setInputComment={setInputComment}
+          saveTab={saveTab}
         />
-        <input
-          className={style.input}
-          id='input-comment'
-          placeholder='additional comment'
-          maxLength='150'
-          value={inputComment}
-          onChange={(e) => setInputComment(e.target.value)}
-        />
-
-        <button onClick={saveTab} id='save-btn' className={style.savebutton}>
-          Add Tab
-        </button>
-
-        <ul>
-          <AnimatePresence>
-          {mySites.map((site, index) => (
-            <motion.li
-              key={index}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}>
-              <div className={style.tabContainer}>
-                <div className={style.tabtext}>
-                  <a target='_blank' href={site.url} className={style.tabTitle}>
-                    {site.title}
-                  </a>
-                  <p className={style.tabComment}>{site.comment}</p>
-                </div>
-                <div className={style.tabDelete}>
-                  <button onClick={() => deleteSite(index)}>
-                    <RxCross2 />
-                  </button>
-                </div>
-              </div>
-            </motion.li>
-          ))}
-          {/* <li>
-            <div className={style.tabContainer}>
-              <div className={style.tabtext}>
-                <a target='_blank' href='#' className={style.tabTitle}>
-                  dev test title1
-                </a>
-
-                <p className={style.tabComment}>dev test 1 desrptn</p>
-              </div>
-              <div className={style.tabDelete}>
-                <button onClick={() => deleteSite(index)}>
-                  <RxCross2 />
-                </button>
-              </div>
-            </div>
-          </li>
-
-          <li>
-            <div className={style.tabContainer}>
-              <div className={style.tabtext}>
-                <a target='_blank' href='#' className={style.tabTitle}>
-                  dev test title2
-                </a>
-
-                <p className={style.tabComment}>dev test 2 desrptn</p>
-              </div>
-              <div className={style.tabDelete}>
-                <button onClick={() => deleteSite(index)}>
-                  <RxCross2 />
-                </button>
-              </div>
-            </div>
-          </li> */}
-          </AnimatePresence>
-        </ul>
+        <TabList mySites={mySites} deleteSite={deleteSite} />
       </div>
     </div>
   );
