@@ -8,7 +8,8 @@ function App() {
   const [inputComment, setInputComment] = useState("");
 
   useEffect(() => {
-    const storage = chrome?.storage?.local || browser?.storage?.local;
+    const storage = chrome?.storage?.local;
+    // const storage = chrome?.storage?.local || browser?.storage?.local;
 
     if (!storage) {
       console.error("WebExtensions storage API not supported");
