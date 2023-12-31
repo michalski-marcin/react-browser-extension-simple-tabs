@@ -1,22 +1,22 @@
-import React, { useState, useEffect } from "react";
-import TabList from "./components/TabList";
-import TabForm from "./components/TabForm";
+import React, { useState, useEffect } from 'react';
+import TabList from './components/TabList';
+import TabForm from './components/TabForm';
 
 function App() {
   const [mySites, setMySites] = useState([]);
-  const [inputTitle, setInputTitle] = useState("");
-  const [inputComment, setInputComment] = useState("");
+  const [inputTitle, setInputTitle] = useState('');
+  const [inputComment, setInputComment] = useState('');
 
   useEffect(() => {
     const storage = chrome?.storage?.local;
     // const storage = chrome?.storage?.local || browser?.storage?.local;
 
     if (!storage) {
-      console.error("WebExtensions storage API not supported");
+      console.error('WebExtensions storage API not supported');
       return;
     }
 
-    storage.get("mySites", (result) => {
+    storage.get('mySites', (result) => {
       const sitesFromStorage = result.mySites;
       if (sitesFromStorage) {
         setMySites((prevSites) => [...prevSites, ...sitesFromStorage]);
@@ -40,14 +40,13 @@ function App() {
         storage.set({ mySites: updatedSites });
       }
 
-      setInputTitle("");
-      setInputComment("");
+      setInputTitle('');
+      setInputComment('');
     });
   };
 
-  const deleteSite = (index) => {
-    const updatedSites = [...mySites];
-    updatedSites.splice(index, 1);
+  const deleteSite = (url) => {
+    const updatedSites = mySites.filter((site) => site.url !== url);
 
     setMySites(updatedSites);
 
@@ -67,7 +66,10 @@ function App() {
           setInputComment={setInputComment}
           saveTab={saveTab}
         />
-        <TabList mySites={mySites} deleteSite={deleteSite} />
+        <TabList
+          mySites={mySites}
+          deleteSite={deleteSite}
+        />
       </div>
     </div>
   );

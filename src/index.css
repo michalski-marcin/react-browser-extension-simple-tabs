@@ -4,28 +4,26 @@
 @tailwind utilities;
 
 @layer components {
-    .input-tailw {
-      @apply bg-transparent p-2 w-full text-xs text-[#174873] border-b-2 border-[#cccccc] mb-5 transition duration-200 focus:border-[#295FA6] focus:outline-none placeholder:text-xs;
-    }
+  .input-tailw {
+    @apply bg-transparent p-2 w-full text-xs text-[#174873] border-b-2 border-[#cccccc] mb-5 transition duration-200 focus:border-[#295FA6] focus:outline-none placeholder:text-xs;
+  }
 }
-
 
 body {
-    width: 450px;
-    max-width: 450px;
-    overflow-x: hidden;
+  width: 450px;
+  max-width: 450px;
+  overflow-x: hidden;
 }
 
-
 ::-webkit-scrollbar {
-    width: 3px;
+  width: 3px;
 }
 
 ::-webkit-scrollbar-track {
-    background-color: #f2f2f2;
+  background-color: #f2f2f2;
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: #174873;
-    border-radius: 10px;
+  background-color: #174873;
+  border-radius: 10px;
 }
