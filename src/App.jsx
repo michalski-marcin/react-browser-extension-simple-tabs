@@ -30,6 +30,7 @@ function App() {
         title: inputTitle || tabs[0].title,
         comment: inputComment,
         url: tabs[0].url,
+        uuid: self.crypto.randomUUID(),
       };
 
       const updatedSites = [...mySites, newSite];
@@ -45,8 +46,8 @@ function App() {
     });
   };
 
-  const deleteSite = (url) => {
-    const updatedSites = mySites.filter((site) => site.url !== url);
+  const deleteSite = (uuid) => {
+    const updatedSites = mySites.filter((site) => site.uuid !== uuid);
 
     setMySites(updatedSites);
 
@@ -57,8 +58,8 @@ function App() {
   };
 
   return (
-    <div className='h-screen w-screen bg-[#174873]'>
-      <div className='p-5 w-screen overflowx-hidden m-auto bg-[#F2F2F2] shadow-md'>
+    <div className='h-screen w-screen bg-[#F2F2F2]'>
+      <div className='p-5 w-screen overflowx-hidden m-auto bg-[#F2F2F2]'>
         <TabForm
           inputTitle={inputTitle}
           inputComment={inputComment}
