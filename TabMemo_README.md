@@ -4,6 +4,8 @@
 ## Introduction
 
 This project is a Chrome extension that allows users to attach notes to their browser tabs. It's designed for users who work with multiple tabs and need an easy way to remember tasks or notes associated with each one. TabMemo provides a simple, responsive interface for quickly adding, viewing, and managing notes directly from the browser.
+![Screen of TabMemo in Chrome browser](public/114.jpg)
+<br>
 
 ## Table of Contents
 
@@ -12,6 +14,7 @@ This project is a Chrome extension that allows users to attach notes to their br
 - [Installation](#installation)
 - [Usage](#usage)
 - [Roadmap](#roadmap)
+- [Updates](#updates)
 - [License](#license)
 - [Author](#author)
 
@@ -66,7 +69,7 @@ To set up this project locally, follow the steps below:
 
 ## Usage
 
-```text
+
 1. **Creating a Note**:
    - Click the TabMemo icon in the browser toolbar.
    - Enter your note in the input field and it will be saved automatically.
@@ -77,13 +80,26 @@ To set up this project locally, follow the steps below:
 
 3. **Managing Notes**:
    - Edit or delete notes from the tab list interface.
-```
+
 
 ## Roadmap
 
 - **Sync Across Devices**: Add cloud sync functionality for accessing notes across multiple devices.
 - **Customizable Themes**: Allow users to switch between light and dark themes for the extension.
 - **Search Functionality**: Implement a search feature to quickly find specific notes.
+
+## Updates
+
+_v 1.1.1 - Fix: Unique keys of list elements_
+- Implementation of randomUUID() method for unique keys of `<li>` elements.
+
+<br>
+
+_v 1.1 - Feat: Added AnimatePresence and Prettier_
+
+- List with tabs now moves smoothly to fill the gap after removed element thanks to AnimatePresence feature in Framer Motion library for React.
+- All code was formatted using Prettier
+
 
 ## License
 
